@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Naki</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            background: black;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container { position: relative; z-index: 2; }
+
+        .text {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ff0080;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #i { transition: margin-left 1s ease-in-out; }
+
+        .fade-in-l {
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .hide {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+        }
+
+        .sentence {
+            font-size: 3rem;
+            opacity: 0;
+            color: #fff5e1;
+            font-family: 'Dancing Script', cursive;
+            display: none;
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pink { color: #ff0080 !important; font-weight: bold; }
+
+        .subtext {
+            font-size: 1.5rem;
+            opacity: 0;
+            color: #f8f8f8;
+            font-family: 'Dancing Script', cursive;
+            display: none;
+        }
+
+        @keyframes fadeInSubtext {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text" id="mainText">
+            <span id="a">A</span><span id="i">i</span>
+            <span class="fade-in-l" id="l">l</span>
+        </div>
+        <div class="sentence" id="typedText">Hyy, I am <span class='pink'>Ali Naki</span>.</div>
+        <div class="subtext" id="subtext">Stay tuned for something amazing.</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let aiText = document.getElementById("mainText");
+            let a = document.getElementById("a");
+            let i = document.getElementById("i");
+            let l = document.getElementById("l");
+
+            setTimeout(() => {
+                aiText.style.opacity = "1"; // Step 1: "Ai" appears
+                aiText.style.animation = "fadeIn 1.5s ease-in-out forwards";
+
+                setTimeout(() => {
+                    i.style.marginLeft = "35px"; // Step 2: "Ai" turns into "A i"
+
+                    setTimeout(() => {
+                        l.style.opacity = "1"; // Step 3: "l" fades in, forming "Ali"
+                        i.style.marginLeft = "1"; // Remove space, merging to "Ali"
+
+                        setTimeout(() => {
+                            aiText.classList.add("hide"); // Step 4: Fade out "Ali"
+
+                            setTimeout(() => {
+                                aiText.style.display = "none";
+                                showFadeInText();
+                            }, 1500);
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+
+            function showFadeInText() {
+                let sentence = document.getElementById("typedText");
+                let subtext = document.getElementById("subtext");
+                
+                sentence.style.display = "block";
+                sentence.style.animation = "fadeInText 3s ease-in forwards";
+                
+                setTimeout(() => {
+                    subtext.style.display = "block";
+                    subtext.style.animation = "fadeInSubtext 2s ease-in forwards";
+                }, 2500);
+            }
+        });
+    </script>
+
+</body>
+</html>
